@@ -1,19 +1,19 @@
-title:            Site Title
+title:            Squares and cubes
 tagline:          A short tagline
-description:      Describe your website.
+description:      Not much Lego in there, but some other building blocks...
 #Comment out url when working locally to resolve base urls correctly
-url:              http://your-site.com
+url:              http://localhost:4000
 
 # Owner/author information
 owner:
-  name:           Your Name
+  name:           Emmanuel Durand
   avatar:         bio-photo.jpg
   bio:            "Describe your self."
-  email:          your@email.com
+  email:          emmanueldurand@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
-  twitter:        
+  twitter:        treyBucheman 
   facebook:       
-  github:         
+  github:         paperManu
   linkedin:       
   instagram:      
   lastfm:         
@@ -34,17 +34,14 @@ links:
     url: /about
   - title: Articles
     url: /articles
-  - title: Theme Setup
-    url: /theme-setup
-  - title: Made Mistakes
-    url: http://mademistakes.com
-    external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/New_York
+timezone:    Canada/Montreal
 future:      true
 pygments:    true
 markdown:    kramdown
+
+port:        4000
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink:   /:categories/:title
