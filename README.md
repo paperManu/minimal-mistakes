@@ -16,13 +16,13 @@
 
 General notes and suggestions for customizing Minimal Mistakes.
 
-## Basic Setup
+## Basic Setup for a new Jekyll site
 
-1. [Install Jekyll](http://jekyllrb.com) if you haven't already.
-2. Fork the [Minimal Mistakes repo](http://github.com/mmistakes/minimal-mistakes/)
-3. Clone the repo you just forked to your computer.
+1. [Install Bundler](http://bundler.io) `gem install bundler` and then install [Jekyll](http://jekyllrb.com) and all dependencies `bundle install`.
+2. Fork the [Minimal Mistakes repo](http://github.com/mmistakes/minimal-mistakes/fork).
+3. Clone the repo you just forked and rename it.
 4. Edit `_config.yml` to personalize your site.
-5. Check out the sample posts in `_posts` to see examples for pulling in large feature images, tags, and other YAML data.
+5. Check out the sample posts in `_posts` to see examples for pulling in large feature images, assigning categories and tags, and other YAML data.
 6. Read the documentation below for further customization pointers and documentation.
 
 [Demo the Theme](http://mmistakes.github.io/minimal-mistakes)
@@ -34,7 +34,7 @@ General notes and suggestions for customizing Minimal Mistakes.
 ## Setup for an Existing Jekyll site
 
 1. Clone the following folders: `_includes`, `_layouts`, `assets`, and `images`.
-2. Clone the following files and personalize content as need: `about.md`, `articles.html`, `index.md`, `feed.xml`, `sitemap.xml`
+2. Clone the following files and personalize content as need: `about.md`, `posts.md`, `index.md`, `feed.xml`, `sitemap.xml`
 3. Set the following variables in your `config.yml` file:
 
 ``` yaml
@@ -71,7 +71,7 @@ bing_verify:
 # For external links add external: true
 links:
   - title: Theme Setup
-    url: /theme-setup
+    url: /theme-setup/
   - title: External Link
     url: http://mademistakes.com
     external: true
