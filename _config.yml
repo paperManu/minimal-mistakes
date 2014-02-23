@@ -1,7 +1,7 @@
 title:            Squares and cubes
 tagline:          A short tagline
 description:      Not much Legos in there, but some other building blocks...
-#Comment out url when working locally to resolve base urls correctly
+# Your site's domain goes here. Leave localhost server or blank when working locally.
 url:              http://localhost:4000
 
 # Owner/author information
@@ -44,7 +44,7 @@ markdown:    kramdown
 port:        4000
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink:   /:categories/:title
+permalink:   /:categories/:title/
 
 kramdown:
   auto_ids: true
