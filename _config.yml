@@ -1,6 +1,6 @@
 title:            Squares and cubes
 tagline:          A short tagline
-description:      Not much Lego in there, but some other building blocks...
+description:      Not much Legos in there, but some other building blocks...
 #Comment out url when working locally to resolve base urls correctly
 url:              http://localhost:4000
 
@@ -8,13 +8,13 @@ url:              http://localhost:4000
 owner:
   name:           Emmanuel Durand
   avatar:         bio-photo.jpg
-  bio:            "Describe your self."
+  bio:            "Uses his keyboard to develop computer graphics-related projects. Also, does some science."
   email:          emmanueldurand@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
   twitter:        treyBucheman 
   facebook:       
   github:         paperManu
-  linkedin:       
+  linkedin:       durandemmanuel
   instagram:      
   lastfm:         
   tumblr:         
