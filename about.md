@@ -1,32 +1,15 @@
 ---
 layout: page
 permalink: /about/
-title: About the Theme
 tagline: Minimal Mistakes, a Jekyll Theme
 tags: [about, Jekyll, theme, responsive]
-modified: 9-9-2013
+modified: 19-3-2014
 image:
-  feature: texture-feature-02.jpg
-  credit: Texture Lovers
-  creditlink: http://texturelovers.com
+  feature: texture-arrows-parking.jpg
 ---
 
-Jekyll is pretty rad and figured releasing a cleaned up version of [my site](http://mademistakes.com)[^1] as a theme for others to hack and build on would be fun. So here be that theme --- I call it **Minimal Mistakes**, a responsive Jekyll theme with large featured images and solid typography. 
+I am a coder / researcher with a PhD in Computer Graphics from [Arts et Métiers ParisTech](http://www.ensam.fr). Aside from that I am also an engineer (from the same school), and I have a MSc in Simulation and Virtual Reality.
 
-## Minimal Mistakes is all about:
+Currently, I work at the Society for Arts and Technology in Montreal (also named [SAT](http://www.sat.qc.ca)) as a researcher / developer. I spend my time there coding tools useful either to pursue research, ease and extend the usability of the devices we have, or help artists with their projects. My code can be found on my [Github page](http://github.com/paperManu) and on the [SAT Metalab repository](http://code.sat.qc.ca).
 
-* Responsive templates. Looking good on mobile, tablet, and desktop.
-* Gracefully degrading in older browsers. Compatible with Internet Explorer 8+ and all modern browsers. 
-* Minimal embellishments --- content first.
-* Large feature images for posts and pages.
-* Author sidebar to pimp your bio, photo[^2], and social media links.
-* Simple and clear permalink structure *(ie: domain.com/category/post-title)*
-
-<a markdown="0" href="{{ site.url }}/theme-setup" class="btn">Install Minimal Mistakes Theme</a>
-
-[^1]: Since open sourcing this theme I have released a couple other Jekyll themes. My website [Made Mistakes](http://mademistakes.com) is currently using a modified version of my [So Simple Theme](http://mmistakes.github.io/so-simple-theme/).
-<<<<<<< HEAD
-=======
-
-[^2]: Fancy avatars provided by [Brandon Mathis](http://brandonmathis.com/projects/fancy-avatars/demo/) under a [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/).
->>>>>>> 56de806fa24f66a1f7a378ca5cf26c5dfb6ac490
+I am mainly interested in everything 3D (modeling, rendering, OpenGL...), photography (especially computational photography, I lack time to do real photography), videogames (love indies, but I lack time for this too), space and dinosaurs.
