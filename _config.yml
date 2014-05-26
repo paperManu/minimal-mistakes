@@ -34,11 +34,13 @@ links:
     url: /about
   - title: Posts
     url: /posts
+  #- title: Projects
+  #  url: /projects
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    Canada/Montreal
 future:      true
-pygments:    true
+highlighter: true
 markdown:    kramdown
 
 port:        4000
@@ -61,4 +63,4 @@ kramdown:
     coderay_css: class
 
 include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sh", "*.sublime-project", "*.sublime-workspace", "*.swp", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
