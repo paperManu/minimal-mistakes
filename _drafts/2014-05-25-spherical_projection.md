@@ -13,9 +13,9 @@ Obviously there is a way around this limitation, which is used in every realtime
 
 This gives us a minimum of seven render pass (you can do with six if your dome is not that 'full'), which is time and memory consuming. Also it makes the rendering of some visual effects harder, one of them being stereoscopic rendering. This is all the more frustrating as there are work around for offline renderers, which do not have the same graphic card related limitation. Paul Bourke[^1] wrote some interesting articles in this matter.
 
-So, is it possible to create a dome master (that is the name of videos dedicated to fulldome projection) in realtime in a single pass? The answer is kind of a 'yes, but...', which is what makes things interesting.
+So, is it possible to create a dome master (that is the name of videos dedicated to fulldome projection) in realtime in a single pass? The answer is kind of a 'yes, but...', and this is what makes things interesting.
 
-## First step: changing coordinate system
+## Changing coordinate system
 
 ## Shortest path between two points on Earth
 
