@@ -41,7 +41,7 @@ links:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    Canada/Montreal
 future:      true
-highlighter: true
+highlighter: pygments
 markdown:    kramdown
 
 port:        4000
