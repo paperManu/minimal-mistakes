@@ -3,6 +3,8 @@ layout: post
 title: Spherical projection through GLSL
 description: "My take on realtime spherical projection"
 modified: 2014-05-25
+image:
+    feature: spherical_glsl/feature.png
 ---
 
 ## Spherical projection? In realtime?
