@@ -9,11 +9,13 @@ modified: 2014-05-25
 
 When working with a fulldome for realtime 3D projects, one thing is immediately noticeable: this projection surface is not planar. As obvious as it is, it leads to the simple fact that it is not possible for a graphic card to output an image which will not look absurdly deformed once projected. Take a line as a simple example: a straight line becomes a curve when projected on a sphere, so to look straight it has to be deformed before projection and the desired output should be indeed a curve. But a graphic card knows nothing about curves, it can only draw lines, and fill triangles.
 
-Obviously there is a way around this limitation, which is used in every realtime renderers (and in some offline renderers too). The rendering is done in two steps: first a cube map is filled with six renderings for the six directions defined by the cube, then this cube map is applied as a texture on a 3D model representing the mapping of the dome, which is captured and renderer by another camera.
+Obviously there is a way around this limitation, which is used in every realtime renderers (and in some offline renderers too). The rendering is done in two steps: first a cube map is filled with six renderings for the six directions defined by the cube, then this cube map is applied as a texture on a 3D model representing the mapping of the dome, which is captured and renderer by another camera. This method is derived from cube mapping[^1].
 
-[Image of current spherical rendering]
+![cubeMapping]({{ site.url }}/images/spherical_glsl/cubeMapping.png)
 
-This gives us a minimum of seven render pass (you can do with six if your dome is not that 'full'), which is time and memory consuming. Also it makes the rendering of some visual effects harder, one of them being stereoscopic rendering. This is all the more frustrating as there are work around for offline renderers, which do not have the same graphic card related limitation. Paul Bourke[^1] wrote some interesting articles in this matter.
+This gives us a minimum of seven render pass (you can do with six if your dome is not that 'full'), which is time and memory consuming. Also it makes the rendering of some visual effects harder, one of them being stereoscopic rendering. This is all the more frustrating as there are work around for offline renderers, which do not have the same graphic card related limitation. Paul Bourke[^2] wrote some interesting articles in this matter.
+
+![dome]({{ site.url }}/images/spherical_glsl/dome.png)
 
 So, is it possible to create a dome master (that is the name of videos dedicated to fulldome projection) in realtime in a single pass? The answer is kind of a 'yes, but...', and this is what makes things interesting.
 
@@ -78,7 +80,9 @@ vec4 toSphere(in vec4 v)
 }
 {% endhighlight %}
 
-[Image of the unrefined projection]
+Here is an example result of a plane rendered with such a shader: 
+
+![simpleGLSLProjection]({{ site.url }}/images/spherical_glsl/spherical_glsl_simple.png)
 
 Hum. This looks very edgy for a spherical projection. This simple plane does not look like a plane any more, even in our new space. When projected on a sphere, a line becomes a curve and this is definitely not what we see here. This is due to how a graphic card draws edges and triangles: it knows nothing but straight lines. And it certainly does not know that we are working in a spherical space.
 
@@ -97,7 +101,7 @@ Our initial solution was implemented through a vertex shader. Since OpenGL 3.0 (
 
 A few things to know though. Firstly, it is not possible to do recursive function call in GLSL, so you have to declare as many identical functions as the maximum subdivision level you want. Secondly, geometry shaders were never meant to add lots of geometry, so performance drops drastically when the subdivision level gets high. Moreover the maximum number of vertices a geometry shader can output is fairly low (depending on the hardware / driver, but don't count on anything higher than 128). Anyway, subdividing three times gives already good results:
 
-[Image of the subdivided projection]
+![simpleGLSLProjection]({{ site.url }}/images/spherical_glsl/spherical_glsl_refined.png)
 
 ## Discussion
 
@@ -109,4 +113,6 @@ This is a quite obvious way to create a dome master, the smart move being in the
 
 But this approach is still interesting in that it reduces gpu memory bandwidth consumption, and opens the path to stereoscopic spherical projections.
 
-[^1]: [Omni-directional Stereoscopic Fisheye Images for Immersive Hemispherical Dome Environments](http://paulbourke.net/papers/cgat09)
+[^1]: [Cube mapping](https://en.wikipedia.org/wiki/Cube_mapping)
+[^2]: [Omni-directional Stereoscopic Fisheye Images for Immersive Hemispherical Dome Environments](http://paulbourke.net/papers/cgat09)
+[^3]: [Cube mapping and dome rendering were made with Blender](http://blender.org)
