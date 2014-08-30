@@ -298,6 +298,34 @@ body {
 		}
 	}
 }
+.article-citation {
+    font-size: 14px;
+}
+.image-sequence {
+	position: relative;
+	margin-bottom: 2em;
+    display: block;
+    width: 100%;
+	img {
+		width: 100%;
+		height: auto;
+        display: block;
+		-ms-interpolation-mode: bicubic;
+	}
+}
+.image-sequence-description {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(127, 127, 127, 0.6);
+    color: #fff;
+}
+.image-sequence:hover .image-sequence-description {
+    visibility: visible;
+    opacity: 1;
+}
 .byline {
 	clear: both;
 	font-size: 80%;
@@ -417,6 +445,11 @@ body {
 	li > a.reversefootnote {
 		border-bottom-width: 0;
 	}
+}
+.works {
+    display: inline;
+    float: left;
+    width: 70%;
 }
 .toc {
 	display: none;

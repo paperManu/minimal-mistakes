@@ -1,0 +1,6 @@
+- name: name
+  image: works/texture-subway.jpg
+  image-credit: somebody
+  image-credit-link:
+  description: this is a description
+  link: http://emmanueldurand.net
