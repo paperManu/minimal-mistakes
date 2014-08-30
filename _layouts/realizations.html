@@ -30,7 +30,8 @@
           <img src="{{ site.url }}/images/{{ work.image }}" alt="{{ work.description }} feature image">
           {% if work.image-credit %}<span class="image-credit">Photo Credit: <a href="{{ work.image-credit-link }}">{{ work.image-credit }}</a></span>{% endif %}
           <p class="image-sequence-description">
-            <b><a href={{ work.link }}>{{ work.name }}</a></b><br><br>
+            <br>
+            <b><a href={{ work.link }}>{{ work.name }}</a></b><br>
             {{ work.description }}
           </p>
         </div>
