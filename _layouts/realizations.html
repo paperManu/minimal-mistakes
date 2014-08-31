@@ -24,19 +24,6 @@
   </div>
 
   <div class=works>
-    <h1>Projects</h1>
-      {% for work in site.data.works %}
-        <div class="image-sequence">
-          <img src="{{ site.url }}/images/{{ work.image }}" alt="{{ work.description }} feature image">
-          {% if work.image-credit %}<span class="image-credit">Photo Credit: <a href="{{ work.image-credit-link }}">{{ work.image-credit }}</a></span>{% endif %}
-          <p class="image-sequence-description">
-            <br>
-            <b><a href={{ work.link }}>{{ work.name }}</a></b><br>
-            {{ work.description }}
-          </p>
-        </div>
-      {% endfor %}
-
     <h1>Articles</h1>
       {% for article in site.data.articles %}
         <div class=article-citation>
@@ -45,6 +32,19 @@
           {% else %}
             {{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})<br>
           {% endif %}
+        </div>
+      {% endfor %}
+
+    <h1>Projects</h1>
+      {% for work in site.data.works %}
+        <div class="image-sequence">
+          <img src="{{ site.url }}/images/{{ work.image }}" alt="{{ work.description }} feature image">
+          {% if work.image-credit %}<span class="image-credit">Photo Credit: <a href="{{ work.image-credit-link }}">{{ work.image-credit }}</a></span>{% endif %}
+          <p class="image-sequence-description">
+            <br>
+            <font size=+1><b><a href={{ work.link }}>{{ work.name }}</a></b></font> ({{ work.date }})<br>
+            {{ work.description }}
+          </p>
         </div>
       {% endfor %}
   </div>
