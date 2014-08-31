@@ -28,9 +28,9 @@
       {% for article in site.data.articles %}
         <div class=article-citation>
           {% if article.link %}
-            <a href={{ article.link }}>{{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})</a><br>
+            <a href={{ article.link }}>{{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})</a><br><br>
           {% else %}
-            {{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})<br>
+            {{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})<br><br>
           {% endif %}
         </div>
       {% endfor %}

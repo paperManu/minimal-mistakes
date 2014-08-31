@@ -451,7 +451,18 @@ body {
 .works {
     display: inline;
     float: left;
-    width: 60%;
+		.container();
+		.grid(12,10);
+		.prefix(12,1);
+		.suffix(12,1);
+    @media @600px {
+			.grid(12,7);
+			.prefix(12,0);
+			.suffix(12,0);
+    }
+    @media @1382px {
+			.grid(12,5.5);
+    }
 }
 .toc {
 	display: none;
