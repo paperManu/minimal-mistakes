@@ -2,7 +2,7 @@
   image: works/turcot.jpg
   image-credit: Bérengère Marin-Dubuard
   image-credit-link: http://www.beewoo.net/
-  description: "An interactive installation for the fulldome of the SAT, where the user can navigate throughout the gigantic Turcot interchange. A wooden mockup of the freeway is used as an input device for the user to select its position in the virtual representation being projected on the dome. For this project, I was in charge of the tangible interface using computer vision."
+  description: "An interactive installation for the fulldome of the SAT, where the user can navigate throughout the gigantic Turcot interchange. A wooden mockup of the freeway is used as an input device for the user to select his position in the virtual representation being projected on the dome. For this project, I was in charge of the tangible interface using computer vision."
   date: 2014
   link: http://www.beewoo.net/index.php/projects/turcot/
 
@@ -17,6 +17,14 @@
   description: "Drawing Space is an immersive telepresence installation, connecting two places together for people to draw and build a virtual world together. A 3D representation of both is done using z-cameras, the result being a color point cloud which is on one hand sent to the other participant for them to see each other in this virtual world, and on the other hand used for pose detection as the drawing is done by moving the hand freely in space."
   date: 2013
   link: http://vimeo.com/88794237
+
+- name: "Eana - Terre vivante"
+  image: works/eana.png
+  image-credit: on-situ
+  image-credit-link: http://www.on-situ.com
+  description: "A six meter wide cylindrical projection surface, of which a fixed projector and a rotating one enlighten the surface: the rotating projector especially acts like a torch, revealing hidden objects. Its movement is driven by an animation exported by the production software (Maya at the time), and powered by a stepper motor. Also, the projection is slightly corrected to account for the screen deformation."
+  date: 2009
+  link: http://www.on-situ.com/on-situ-references.pdf
 
 - name: "Ray-on"
   image: works/ray-on.jpg
