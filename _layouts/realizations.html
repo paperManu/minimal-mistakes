@@ -30,7 +30,7 @@
           {% if article.link %}
             <a href={{ article.link }}>{{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})</a><br><br>
           {% else %}
-            {{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})<br><br>
+            {{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})<br>
           {% endif %}
         </div>
       {% endfor %}
@@ -40,11 +40,12 @@
         <a href={{ work.link }} class="image-sequence">
           <img src="{{ site.url }}/images/{{ work.image }}" alt="{{ work.description }} feature image">
           {% if work.image-credit %}<span class="image-credit">Photo Credit: {{ work.image-credit }}</span>{% endif %}
+          <div class="image-sequence-box">
           <p class="image-sequence-description">
-            <br>
             <font size=+1><b>{{ work.name }}</b></font> ({{ work.date }})<br>
             {{ work.description }}
           </p>
+          </div>
         </a>
       {% endfor %}
   </div>
