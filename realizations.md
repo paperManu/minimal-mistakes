@@ -4,7 +4,8 @@ permalink: /realizations/
 title: "Realizations"
 tags: [realizations]
 image:
-  feature: texture-realizations.jpg 
-  webgl: "realizations_gl.js"
+  webgl:
+    vertex: ray.vert
+    fragment: ray.frag
 share: 
 ---
