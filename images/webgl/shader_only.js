@@ -1,5 +1,6 @@
 var camera, scene, renderer;
 var uniforms;
+var previousTime;
 
 /*************/
 var getScrollbarWidth = function() {
@@ -26,6 +27,11 @@ var getScrollbarWidth = function() {
 }
 
 /*************/
+var getRenderSize = function() {
+  return [window.innerWidth - getScrollbarWidth(), (window.innerWidth - getScrollbarWidth()) / 4];
+}
+
+/*************/
 var init = function() {
   scene = new THREE.Scene();
   camera = new THREE.OrthographicCamera(-4, 4, 1, -1, 1, 1000);
@@ -37,7 +43,8 @@ var init = function() {
   //var mat = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
 
   uniforms = {
-    time: {type: "f", value: 1.0}
+    time: {type: "f", value: 1.0},
+    resolution: {type: "v2", value: new THREE.Vector2()}
   };
   var mat = new THREE.ShaderMaterial({
     uniforms: uniforms,
@@ -51,24 +58,31 @@ var init = function() {
   scene.add(ambientLight);
 
   renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth - getScrollbarWidth(), (window.innerWidth - getScrollbarWidth()) / 4);
+  renderer.setSize(getRenderSize()[0], getRenderSize()[1]);
   document.getElementById("webgl").appendChild(renderer.domElement);
+
+  uniforms.resolution.value.x = getRenderSize()[0];
+  uniforms.resolution.value.y = getRenderSize()[1];
 }
 
 /*************/
 window.onresize = function() {
-  renderer.setSize(window.innerWidth - getScrollbarWidth(), (window.innerWidth - getScrollbarWidth()) / 4);
+  renderer.setSize(getRenderSize()[0], getRenderSize()[1]);
+  uniforms.resolution.value.x = getRenderSize()[0];
+  uniforms.resolution.value.y = getRenderSize()[1];
 }
 
 /*************/
-var animate = function() {
+var animate = function(timestamp) {
   requestAnimationFrame(animate);
 
   renderer.render(scene, camera);
+  uniforms.time.value = timestamp / 1000.0;
 }
 
 /*************/
 // Shader loading stuff
+// (from http://lab.aerotwist.com/webgl/easing/js/ShaderLoader.js)
 var vertexShaders       = $('script[type="x-shader/x-vertex"]');
 var fragmentShaders     = $('script[type="x-shader/x-fragment"]');
 var shadersLoaderCount  = Math.min(vertexShaders.length, 1) + Math.min(fragmentShaders.length, 1);
@@ -101,10 +115,21 @@ function processShader( jqXHR, textStatus ) {
 }
 
 function shadersLoadComplete() {
-  console.log(shadersHolder);
   init();
   animate();
 }
 
-loadShader(vertexShaders[0], 'vertex');
-loadShader(fragmentShaders[0], 'fragment');
+// WebGL detector
+var supportsWebGL = ( function () {
+  try { 
+    return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' );
+  }
+  catch( e ) {
+    return false;
+  } 
+} )();
+
+if (supportsWebGL) {
+  loadShader(vertexShaders[0], 'vertex');
+  loadShader(fragmentShaders[0], 'fragment');
+}
