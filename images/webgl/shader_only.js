@@ -1,3 +1,4 @@
+var framerate = 30;
 var camera, scene, renderer;
 var uniforms;
 var previousTime;
@@ -74,10 +75,12 @@ window.onresize = function() {
 
 /*************/
 var animate = function(timestamp) {
-  requestAnimationFrame(animate);
+  setTimeout(function() {
+    requestAnimationFrame(animate);
 
-  renderer.render(scene, camera);
-  uniforms.time.value = timestamp / 1000.0;
+    renderer.render(scene, camera);
+    uniforms.time.value = timestamp / 1000.0;
+  }, 1000 / framerate);
 }
 
 /*************/
