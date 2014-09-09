@@ -3,8 +3,8 @@ uniform float time;
 
 float _pixelSize = 4.0;
 float _startupTime = 15.0;
-float _enlargeTime = 45.0;
-float _stopTime = 75.0;
+float _enlargeTime = 30.0;
+float _stopTime = 45.0;
 
 vec4 _background = vec4(1.0, 1.0, 1.0, 1.0);
 vec4 _foreground = vec4(0.0, 0.0, 0.0, 1.0);
