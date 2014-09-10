@@ -3,11 +3,11 @@ uniform float time;
 
 float _pixelSize = 4.0;
 float _startupTime = 15.0;
-float _enlargeTime = 30.0;
-float _stopTime = 45.0;
+float _enlargeTime = 40.0;
+float _stopTime = 60.0;
 
 vec4 _background = vec4(1.0, 1.0, 1.0, 1.0);
-vec4 _foreground = vec4(0.0, 0.0, 0.0, 1.0);
+vec4 _foreground = vec4(0.1, 0.1, 0.1, 1.0);
 
 float _mat1 = 1.0;
 float _mat2 = 2.0;
@@ -83,9 +83,9 @@ float getObject(vec2 p)
 vec4 getColor(float o)
 {
   if (o == 1.0)
-    return vec4(0.8, 0.8, 0.8, 1.0);
+    return vec4(0.9, 0.9, 0.9, 1.0);
   else if (o == 2.0)
-    return vec4(0.6, 0.6, 0.6, 1.0);
+    return vec4(0.7, 0.7, 0.7, 1.0);
   else if (o == 3.0)
     return vec4(0.4, 0.4, 0.4, 1.0);
   else if (o == 4.0)
