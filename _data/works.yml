@@ -1,3 +1,9 @@
+- name: "Facebox"
+  image: works/facebox.jpg
+  description: "This is a Raspberry Pi based shot & print camera, with the particularity that it is designed for self photography. The printing is done by a thermal printer which gives the image a special feeling, the whole device bringing a similar experience to what you would expect from a combination of a photo booth and a Polaroid."
+  date: 2014
+  link: http://mozzarellabs.com/portfolio/facebox/
+
 - name: "Turcot, la route devenue architecture"
   image: works/turcot.jpg
   image-credit: Bérengère Marin-Dubuard
