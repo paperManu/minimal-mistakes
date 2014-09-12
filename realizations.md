@@ -5,7 +5,7 @@ title: "Realizations"
 tags: [realizations]
 image:
   webgl:
-    vertex: ray.vert
-    fragment: ray.frag
+    vertex: curves.vert
+    fragment: curves.frag
 share: 
 ---
