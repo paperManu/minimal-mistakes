@@ -3,5 +3,7 @@ layout: home
 description: "A responsive Jekyll theme with editorial tendencies by designer Michael Rose."
 tags: [Jekyll, theme, responsive, blog, template]
 image:
-  feature: texture-arrows-parking.jpg
+  webgl:
+    vertex: solar_system.vert
+    fragment: solar_system.frag
 ---
