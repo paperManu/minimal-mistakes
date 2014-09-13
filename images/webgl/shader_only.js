@@ -154,8 +154,15 @@ var supportsWebGL = ( function () {
 } )();
 
 /*************/
+// Mobile detector
+function isMobile() {
+  try{ document.createEvent("TouchEvent"); return true; }
+  catch(e){ return false; }
+}
+
+/*************/
 // Load things if WebGL is available
-if (supportsWebGL) {
+if (supportsWebGL && !isMobile()) {
   loadShader(vertexShaders[0], 'vertex');
   loadShader(fragmentShaders[0], 'fragment');
 }
