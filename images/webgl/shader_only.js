@@ -1,5 +1,5 @@
-var framerate = 30;
-var pixelRatio = 2;
+var framerate = 20;
+var pixelRatio = 3;
 
 var camera, scene, renderer;
 var rtTexture, rtScene, rtCamera;
