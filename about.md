@@ -16,4 +16,4 @@ Currently, I work at the Society for Arts and Technology in Montreal (also named
 
 I am mainly interested in everything 3D (modeling, rendering, OpenGL...), photography (especially computational photography, I lack time to do real photography), videogames (love indies, but I lack time for this too), space and dinosaurs.
 
-The goal of this website is to force myself to keep my most interesting tests / ideas / prototypes a little bit organized and visible, and possibly to share with anywho is interested.
+The goal of this website is to force myself to keep my most interesting tests / ideas / prototypes a little bit organized and visible, and possibly to share with anyone who is interested. Also note that it is best viewed on a desktop computer, even if I did my best (as a non web-developer) to make it look fine everywhere.
