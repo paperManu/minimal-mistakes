@@ -5,7 +5,9 @@ tagline: Minimal Mistakes, a Jekyll Theme
 tags: [about, Jekyll, theme, responsive]
 modified: 19-3-2014
 image:
-  feature: texture-arrows-parking.jpg
+  webgl:
+    vertex: curves.vert
+    fragment: curves.frag
 ---
 
 I am a coder / researcher with a PhD in Computer Graphics from [Arts et Métiers ParisTech](http://www.ensam.fr). Aside from that I am also an engineer (from the same school), and I have a MSc in Simulation and Virtual Reality.

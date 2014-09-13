@@ -13,10 +13,18 @@
 
 {% include _navigation.html %}
 
-{% if page.image.feature %}<div class="image-wrap">
+{% if page.image.feature %}
+<div class="image-wrap">
   <img src="{{ site.url }}/images/{{ page.image.feature }}" alt="{{ page.title }} feature image">
   {% if page.image.credit %}<span class="image-credit">Photo Credit: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a></span>{% endif %}
-</div><!-- /.image-wrap -->{% endif %}
+</div><!-- /.image-wrap -->
+{% else if page.image.webgl %}
+  <div id="webgl">
+    <script id="vertexShader" type="x-shader/x-vertex" src="{{ site.url }}/images/webgl/{{ page.image.webgl.vertex }}"></script>
+    <script id="fragmentShader" type="x-shader/x-fragment" src="{{ site.url }}/images/webgl/{{ page.image.webgl.fragment }}"></script>
+    <script src={{ site.url }}/images/webgl/shader_only.js></script>
+  </div>
+{% endif %}
 
 <div id="main" role="main">
   <div class="article-author-side">
