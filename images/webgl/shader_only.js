@@ -44,8 +44,9 @@ var init = function() {
   //var mat = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
 
   uniforms = {
-    time: {type: "f", value: 1.0},
-    resolution: {type: "v2", value: new THREE.Vector2()}
+    _seed: {type: "f", value: Math.random()},
+    _time: {type: "f", value: 1.0},
+    _resolution: {type: "v2", value: new THREE.Vector2()}
   };
   var mat = new THREE.ShaderMaterial({
     uniforms: uniforms,
@@ -62,15 +63,15 @@ var init = function() {
   renderer.setSize(getRenderSize()[0], getRenderSize()[1]);
   document.getElementById("webgl").appendChild(renderer.domElement);
 
-  uniforms.resolution.value.x = getRenderSize()[0];
-  uniforms.resolution.value.y = getRenderSize()[1];
+  uniforms._resolution.value.x = getRenderSize()[0];
+  uniforms._resolution.value.y = getRenderSize()[1];
 }
 
 /*************/
 window.onresize = function() {
   renderer.setSize(getRenderSize()[0], getRenderSize()[1]);
-  uniforms.resolution.value.x = getRenderSize()[0];
-  uniforms.resolution.value.y = getRenderSize()[1];
+  uniforms._resolution.value.x = getRenderSize()[0];
+  uniforms._resolution.value.y = getRenderSize()[1];
 }
 
 /*************/
@@ -79,7 +80,7 @@ var animate = function(timestamp) {
     requestAnimationFrame(animate);
 
     renderer.render(scene, camera);
-    uniforms.time.value = timestamp / 1000.0;
+    uniforms._time.value = timestamp / 1000.0;
   }, 1000 / framerate);
 }
 
@@ -122,6 +123,7 @@ function shadersLoadComplete() {
   animate();
 }
 
+/*************/
 // WebGL detector
 var supportsWebGL = ( function () {
   try { 
@@ -132,6 +134,8 @@ var supportsWebGL = ( function () {
   } 
 } )();
 
+/*************/
+// Load things if WebGL is available
 if (supportsWebGL) {
   loadShader(vertexShaders[0], 'vertex');
   loadShader(fragmentShaders[0], 'fragment');

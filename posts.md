@@ -5,5 +5,7 @@ title: All Posts
 tagline: A List of Posts
 tags: [blog]
 image:
-  feature: texture-subway.jpg
+  webgl:
+    vertex: solar_system.vert
+    fragment: solar_system.frag
 ---

@@ -1,5 +1,5 @@
-uniform vec2 resolution;
-uniform float time;
+uniform vec2 _resolution;
+uniform float _time;
 
 float _pixelSize = 4.0;
 float _startupTime = 15.0;
@@ -86,7 +86,7 @@ float sinusoidMoutain(vec2 p, float h, float d)
   sinProjection.y = sin(p.x) * h + sin(p.x / 3.0) * h / 4.0 + sin(p.x / 5.0) * h / 8.0 + d;
 
   float maxDistance = 64.0;
-  if (distance(sinProjection.y, p.y) < 2.0 && sinProjection.y > p.y) // + startCurve(time, _enlargeTime) * maxDistance && sinProjection.y > p.y)
+  if (distance(sinProjection.y, p.y) < 2.0 && sinProjection.y > p.y) // + startCurve(_time, _enlargeTime) * maxDistance && sinProjection.y > p.y)
     return 1.0;
   else
     return 0.0;
@@ -95,17 +95,17 @@ float sinusoidMoutain(vec2 p, float h, float d)
 /*************/
 float getObject(vec2 p)
 {
-  float resY = resolution.y / _pixelSize;
-  float n = 1.0 - startCurve(time, _noiseTime) * noise(p.xy / 12.0, 0.6, 0.7);
-  vec4 sin1Params = vec4(p.x / 16.0 + time, p.y, n * resY / 10.0, resY / 5.0);
-  vec4 sin2Params = vec4(p.x / 12.0 + time, p.y, n * resY / 6.0, resY / 5.0 * 2.0);
-  vec4 sin3Params = vec4(p.x / 8.0 + time, p.y, n * resY / 8.0, resY / 5.0 * 3.0);
-  vec4 sin4Params = vec4(p.x / 4.0 + time, p.y, n * resY / 12.0, resY / 5.0 * 4.0);
+  float resY = _resolution.y / _pixelSize;
+  float n = 1.0 - startCurve(_time, _noiseTime) * noise(p.xy / 12.0, 0.6, 0.7);
+  vec4 sin1Params = vec4(p.x / 16.0 + _time, p.y, n * resY / 10.0, resY / 5.0);
+  vec4 sin2Params = vec4(p.x / 12.0 + _time, p.y, n * resY / 6.0, resY / 5.0 * 2.0);
+  vec4 sin3Params = vec4(p.x / 8.0 + _time, p.y, n * resY / 8.0, resY / 5.0 * 3.0);
+  vec4 sin4Params = vec4(p.x / 4.0 + _time, p.y, n * resY / 12.0, resY / 5.0 * 4.0);
 
-  float sin1 = _mat1 * sinusoidMoutain(sin1Params.xy, sin1Params.z * startCurve(time, _startupTime) * (1.0 - startCurve(time, _stopTime)), sin1Params.w);
-  float sin2 = _mat2 * sinusoidMoutain(sin2Params.xy, sin2Params.z * startCurve(time, _startupTime) * (1.0 - startCurve(time, _stopTime)), sin2Params.w);
-  float sin3 = _mat3 * sinusoidMoutain(sin3Params.xy, sin3Params.z * startCurve(time, _startupTime) * (1.0 - startCurve(time, _stopTime)), sin3Params.w);
-  float sin4 = _mat4 * sinusoidMoutain(sin4Params.xy, sin4Params.z * startCurve(time, _startupTime) * (1.0 - startCurve(time, _stopTime)), sin4Params.w);
+  float sin1 = _mat1 * sinusoidMoutain(sin1Params.xy, sin1Params.z * startCurve(_time, _startupTime) * (1.0 - startCurve(_time, _stopTime)), sin1Params.w);
+  float sin2 = _mat2 * sinusoidMoutain(sin2Params.xy, sin2Params.z * startCurve(_time, _startupTime) * (1.0 - startCurve(_time, _stopTime)), sin2Params.w);
+  float sin3 = _mat3 * sinusoidMoutain(sin3Params.xy, sin3Params.z * startCurve(_time, _startupTime) * (1.0 - startCurve(_time, _stopTime)), sin3Params.w);
+  float sin4 = _mat4 * sinusoidMoutain(sin4Params.xy, sin4Params.z * startCurve(_time, _startupTime) * (1.0 - startCurve(_time, _stopTime)), sin4Params.w);
 
   return sin1 == _mat1 ? _mat1 :
          sin2 == _mat2 ? _mat2 :
@@ -142,7 +142,7 @@ vec4 getColor(float o)
   else
     return _foreground;
 
-  float n = 1.0; // - startCurve(time, _noiseTime) * 0.5 * noise(vec2(gl_FragCoord.x / _pixelSize / noiseSize + time, gl_FragCoord.y / _pixelSize / noiseSize), 0.6, 0.7);
+  float n = 1.0; // - startCurve(_time, _noiseTime) * 0.5 * noise(vec2(gl_FragCoord.x / _pixelSize / noiseSize + _time, gl_FragCoord.y / _pixelSize / noiseSize), 0.6, 0.7);
   return color * n;
 }
 
@@ -153,7 +153,7 @@ void main()
 
   vec2 playerPos;
   playerPos.x = 10.0;
-  playerPos.y = (sin(time) + 1.0) / 2.0 * resolution.y / _pixelSize;
+  playerPos.y = (sin(_time) + 1.0) / 2.0 * _resolution.y / _pixelSize;
   playerPos = floor(playerPos);
 
   vec2 fragPosition = getPixelCoords(gl_FragCoord.xy);
@@ -161,6 +161,6 @@ void main()
   if (object > 0.0)
     outColor = getColor(object);
 
-  float distToBorder = smoothstep(0.0, 16.0, min(gl_FragCoord.y, resolution.y - gl_FragCoord.y));
+  float distToBorder = smoothstep(0.0, 32.0, min(gl_FragCoord.y, _resolution.y - gl_FragCoord.y));
   gl_FragColor = mix(_background, outColor, distToBorder);
 }
