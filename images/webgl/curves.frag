@@ -1,7 +1,7 @@
 uniform vec2 _resolution;
 uniform float _time;
 
-float _pixelSize = 4.0;
+float _pixelSize = 1.0;
 float _startupTime = 15.0;
 float _enlargeTime = 40.0;
 float _noiseTime = 40.0;
@@ -161,6 +161,6 @@ void main()
   if (object > 0.0)
     outColor = getColor(object);
 
-  float distToBorder = smoothstep(0.0, 32.0, min(gl_FragCoord.y, _resolution.y - gl_FragCoord.y));
+  float distToBorder = smoothstep(0.0, 8.0, min(gl_FragCoord.y, _resolution.y - gl_FragCoord.y));
   gl_FragColor = mix(_background, outColor, distToBorder);
 }

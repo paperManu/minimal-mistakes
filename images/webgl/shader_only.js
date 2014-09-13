@@ -1,5 +1,8 @@
 var framerate = 30;
+var pixelRatio = 2;
+
 var camera, scene, renderer;
+var rtTexture, rtScene, rtCamera;
 var uniforms;
 var previousTime;
 
@@ -34,11 +37,12 @@ var getRenderSize = function() {
 
 /*************/
 var init = function() {
-  scene = new THREE.Scene();
-  camera = new THREE.OrthographicCamera(-4, 4, 1, -1, 1, 1000);
-  camera.position.set(0, 0, 10);
-  camera.lookAt(new THREE.Vector3(0.0, 0.0, 0.0));
-  scene.add(camera);
+  // Initialize offscreen rendering
+  rtTexture = new THREE.WebGLRenderTarget(getRenderSize()[0] / pixelRatio, getRenderSize()[1] / pixelRatio, {minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter});
+  rtScene = new THREE.Scene();
+  rtCamera = new THREE.OrthographicCamera(-4, 4, 1, -1, 1, 1000);
+  rtCamera.position.set(0, 0, 10);
+  rtCamera.lookAt(new THREE.Vector3(0.0, 0.0, 0.0));
 
   var geom = new THREE.PlaneGeometry(8, 2);
   //var mat = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
@@ -54,24 +58,36 @@ var init = function() {
     fragmentShader: shadersHolder.fragment
   });
   var mesh = new THREE.Mesh(geom, mat);
+  rtScene.add(mesh);
+
+  // Render the texture full size
+  scene = new THREE.Scene();
+  camera = new THREE.OrthographicCamera(-4, 4, 1, -1, 1, 1000);
+  camera.position.set(0, 0, 10);
+  camera.lookAt(new THREE.Vector3(0.0, 0.0, 0.0));
+  scene.add(camera);
+
+  geom = new THREE.PlaneGeometry(8, 2);
+  mat = new THREE.MeshBasicMaterial({color: 0xffffff, map: rtTexture});
+  mesh = new THREE.Mesh(geom, mat);
   scene.add(mesh);
 
-  var ambientLight = new THREE.AmbientLight(0xAAAAAA);
-  scene.add(ambientLight);
+  // Set uniforms
+  uniforms._resolution.value.x = getRenderSize()[0] / pixelRatio;
+  uniforms._resolution.value.y = getRenderSize()[1] / pixelRatio;
 
+  // Create the renderer
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(getRenderSize()[0], getRenderSize()[1]);
+  renderer.autoClear = false;
   document.getElementById("webgl").appendChild(renderer.domElement);
-
-  uniforms._resolution.value.x = getRenderSize()[0];
-  uniforms._resolution.value.y = getRenderSize()[1];
 }
 
 /*************/
 window.onresize = function() {
   renderer.setSize(getRenderSize()[0], getRenderSize()[1]);
-  uniforms._resolution.value.x = getRenderSize()[0];
-  uniforms._resolution.value.y = getRenderSize()[1];
+  uniforms._resolution.value.x = getRenderSize()[0] / pixelRatio;
+  uniforms._resolution.value.y = getRenderSize()[1] / pixelRatio;
 }
 
 /*************/
@@ -79,7 +95,10 @@ var animate = function(timestamp) {
   setTimeout(function() {
     requestAnimationFrame(animate);
 
+    renderer.clear();
+    renderer.render(rtScene, rtCamera, rtTexture, true);
     renderer.render(scene, camera);
+
     uniforms._time.value = timestamp / 1000.0;
   }, 1000 / framerate);
 }

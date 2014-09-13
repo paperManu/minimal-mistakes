@@ -2,7 +2,7 @@ uniform vec2 _resolution;
 uniform float _time;
 uniform float _seed;
 
-const float _pixelSize = 3.0;
+const float _pixelSize = 1.0;
 const vec4 _background = vec4(1.0, 1.0, 1.0, 1.0);
 vec3 _position = vec3(0.0, 0.0, -10.0);
 vec3 _target = vec3(0.0, 0.0, 0.0);
@@ -111,7 +111,7 @@ vec2 map(vec3 p)
     {
       if (noise(_seed) > i / nPlanets || i <= 2.0)
       {
-        pos = (rtMat(vec3(0.0, 1.0, 0.0), (_time * (0.5 + noise(i) * 0.5)) / 4.0 + i * 4312.0) * vec4(p, 1.0)).xyz;
+        pos = (rtMat(vec3(0.0, 1.0, 0.4 * noise(i)), (_time * (0.5 + noise(i) * 0.5)) / 4.0 + i * 4312.0) * vec4(p, 1.0)).xyz;
         pos = (trMat(vec3(10.0 + (i + noise(_seed) * 3.0) * 2.0, 0.0, 0.0)) * vec4(pos, 1.0)).xyz;
         planet = min(sphere(pos, (0.5 + noise(i) * 0.5)), planet);
       }
@@ -231,8 +231,8 @@ void main()
 {
   vec4 color = _background;
 
-  _position = normalize(vec3(4.0, 1.0, -8.0)) * 100.0;
-  _target = vec3(cos(_time / 2.34) * 0.2, -2.0 + sin(_time) * 0.2, 0.0);
+  _position = normalize(vec3(4.0, 3.0, -8.0)) * 100.0;
+  _target = vec3(cos(_time / 2.34) * 0.2, -1.0 + sin(_time) * 0.2, 0.0);
 
   _fragResolution = _resolution.xy; //getPixelCoords(_resolution.xy);
   _fragPosition = vec2(getPixelCoords(gl_FragCoord.xy).x * _pixelSize / _resolution.x,
@@ -246,6 +246,6 @@ void main()
 
   color = getColor(point, light, dir);
 
-  float distToBorder = smoothstep(0.0, 32.0, min(gl_FragCoord.y, _resolution.y - gl_FragCoord.y));
+  float distToBorder = smoothstep(0.0, 8.0, min(gl_FragCoord.y, _resolution.y - gl_FragCoord.y));
   gl_FragColor = mix(_background, color, distToBorder);
 }
