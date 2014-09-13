@@ -8,7 +8,7 @@ float _noiseTime = 40.0;
 float _stopTime = 70.0;
 
 vec4 _background = vec4(1.0, 1.0, 1.0, 1.0);
-vec4 _foreground = vec4(0.1, 0.1, 0.1, 1.0);
+vec4 _foreground = vec4(1.0, 1.0, 1.0, 1.0);
 
 float _mat1 = 1.0;
 float _mat2 = 2.0;
