@@ -8,12 +8,12 @@ vec3 _position = vec3(0.0, 0.0, -10.0);
 vec3 _target = vec3(0.0, 0.0, 0.0);
 const float _focal = 12.0;
 
-vec2 _fragResolution = _resolution;
 vec2 _fragPosition = vec2(0.0);
 
 const float nPlanets = 8.0;
 
 float _showPlanets = 1.0;
+float _showSun = 1.0;
 
 /*************/
 float noise(float s)
@@ -26,6 +26,13 @@ float noise(float s)
 float noise2D(vec2 p, float s)
 {
   float q = dot(p,vec2(127.1,311.7));
+	return fract(sin(q)*(43758.5453 + s));
+}
+
+/*************/
+float noise3D(vec3 p, float s)
+{
+  float q = dot(p,vec3(127.1,311.7,269.5));
 	return fract(sin(q)*(43758.5453 + s));
 }
 
@@ -87,33 +94,29 @@ vec3 getCamera(in vec3 p, in vec3 t, in float f)
 /*************/
 vec2 getPixelCoords(vec2 fragPos)
 {
-  vec2 pos;
-  pos.x = fragPos.x;
-  pos.y = fragPos.y;
-
-  pos.x /= _pixelSize;
-  pos.y /= _pixelSize;
-  pos = floor(pos);
-
-  return pos;
+  return floor(fragPos / _pixelSize);
 }
 
 /*************/
 vec2 map(vec3 p)
 {
   vec3 pos = p;
-  float sun = sphere(pos, 4.0);
+  float sun = 1e15;
+
+  if (_showSun == 1.0)
+    sun = sphere(pos, 4.0);
 
   float planet = 1e15;
   if (_showPlanets == 1.0)
   {
     for (float i = 0.0; i < nPlanets; i++)
     {
-      if (noise(_seed) > i / nPlanets || i <= 2.0)
+      if (_seed > i / nPlanets || i <= 2.0)
       {
-        pos = (rtMat(vec3(0.0, 1.0, 0.4 * noise(i)), (_time * (0.5 + noise(i) * 0.5)) / 4.0 + i * 4312.0) * vec4(p, 1.0)).xyz;
+        float n = 0.5 + noise(i) * 0.5;
+        pos = (rtMat(vec3(0.0, 1.0, 0.4 * noise(i)), (_time * n) / 4.0 + i * 4312.0) * vec4(p, 1.0)).xyz;
         pos = (trMat(vec3(10.0 + (i + noise(_seed) * 3.0) * 2.0, 0.0, 0.0)) * vec4(pos, 1.0)).xyz;
-        planet = min(sphere(pos, (0.5 + noise(i) * 0.5)), planet);
+        planet = min(sphere(pos, n), planet);
       }
     }
   }
@@ -145,22 +148,31 @@ vec4 intersect(in vec3 o, in vec3 d, out float dist)
   float eps = 0.001;
   dist = 1e+15;
 
-  for (float t = 70.0; t < 130.0; t += 4.0)
+  float diff = 0.0;
+  for (float t = 70.0; t < 130.0; t += 0.2)
   {
-    vec2 h = map(o + t*d);
-    dist = min(dist, h.x);
-    if (dist < 5.0) // Inner loop to improve accuracy
+    if (diff < 0.2)
     {
-      for (float t2 = 0.0; t2 < 5.0; t2 += 0.2)
-      {
-        h = map(o + (t + t2)*d);
-        if (h.x <= max(1.0, t + t2) * eps)
-          return vec4(o + (t + t2)*d, h.y);
-      }
+      vec2 h = map(o + t*d);
+      dist = min(dist, h.x);
+      if (h.x <= max(1.0, t) * eps)
+        return vec4(o + (t)*d, h.y);
+      diff = h.x;
     }
+    else
+      diff -= 0.2;
   }
 
   return vec4(0.0);
+}
+
+/*************/
+float sss(vec3 p, vec3 n, float d)
+{
+  float o = 0.0;
+  for (float j = 8.0; j > 0.0; j--)
+    o += (j*d + abs(map(p + n*j*d).x)) / exp2(j);
+  return 1.0 - o;
 }
 
 /*************/
@@ -178,7 +190,7 @@ vec4 getMaterial(float index)
 }
 
 /*************/
-vec4 getColor(vec4 p, vec3 l, vec3 d)
+vec4 getColor(vec4 p, vec3 d)
 {
   vec4 c = _background;
 
@@ -192,22 +204,24 @@ vec4 getColor(vec4 p, vec3 l, vec3 d)
     if (p.w != 1.0)
     {
       i = max(0.2, -dot(norm, normalize(p.xyz)));
-
-      // Diffraction
-      //_showPlanets = 0.0;
-      //float dist;
-      //vec4 sunPoint = intersect(_position, d, dist);
-      //if (sunPoint.w != 0.0)
-      //  if (-dot(norm, d) < 1.0)
-      //  {
-      //    //m = mix(m, getMaterial(1.0), 1.0 - dot(norm, d));
-      //    vec3 sunNorm = getNorm(_position.xyz);
-      //    i = (0.5 - dot(sunNorm, d) * 0.5) * (1.0 + dot(norm, d));
-      //  }
-      //_showPlanets = 1.0;
+      float sss = sss(p.xyz, d, 0.05);
+      i *= sss;
     }
     else
-      i = 0.8 - dot(norm, d) * 0.2;
+    {
+      float angle = -dot(norm, d);
+      if (angle < 0.5)
+      {
+        _showSun = 0.0;
+        vec4 point = intersect(_position, d, i); // we are using i here as it is not useful anymore
+        if (point.w == 2.0 && length(point) > length(p))
+          m = m * getMaterial(point.w);
+        i = 1.0;
+        _showSun = 1.0;
+      }
+      else
+        i = 0.8 - dot(norm, d) * 0.2;
+    }
 
 
     c = m*i;
@@ -234,17 +248,14 @@ void main()
   _position = normalize(vec3(4.0, 3.0, -8.0)) * 100.0;
   _target = vec3(cos(_time / 2.34) * 0.2, -1.0 + sin(_time) * 0.2, 0.0);
 
-  _fragResolution = _resolution.xy; //getPixelCoords(_resolution.xy);
-  _fragPosition = vec2(getPixelCoords(gl_FragCoord.xy).x * _pixelSize / _resolution.x,
-                       getPixelCoords(gl_FragCoord.xy).y * _pixelSize / _resolution.y); //getPixelCoords(gl_FragCoord.xy);
+  _fragPosition = gl_FragCoord.xy * _pixelSize / _resolution.xy;
 
-  vec3 light = normalize(vec3(-1.0, -2.0, 1.0));
   vec3 dir = getCamera(_position, _target, _focal);
 
   float dist;
   vec4 point = intersect(_position, dir, dist);
 
-  color = getColor(point, light, dir);
+  color = getColor(point, dir);
 
   float distToBorder = smoothstep(0.0, 8.0, min(gl_FragCoord.y, _resolution.y - gl_FragCoord.y));
   gl_FragColor = mix(_background, color, distToBorder);

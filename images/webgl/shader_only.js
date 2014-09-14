@@ -1,4 +1,4 @@
-var framerate = 20;
+var framerate = 30;
 var pixelRatio = 3;
 
 var camera, scene, renderer;
@@ -48,7 +48,7 @@ var init = function() {
   //var mat = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
 
   uniforms = {
-    _seed: {type: "f", value: Math.random()},
+    _seed: {type: "f", value: Math.random(Date.now())},
     _time: {type: "f", value: 1.0},
     _resolution: {type: "v2", value: new THREE.Vector2()}
   };
