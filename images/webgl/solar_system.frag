@@ -1,3 +1,5 @@
+#define MIN_RAY_STEP 0.05
+
 uniform vec2 _resolution;
 uniform float _time;
 uniform float _seed;
@@ -104,18 +106,21 @@ vec2 map(vec3 p)
   float sun = 1e15;
 
   if (_showSun == 1.0)
-    sun = sphere(pos, 4.0);
+    sun = sphere(pos, 6.0);
 
   float planet = 1e15;
   if (_showPlanets == 1.0)
   {
     for (float i = 0.0; i < nPlanets; i++)
+    //for (float i = 0.0; i < 1.0; i++)
     {
       if (_seed > i / nPlanets || i <= 2.0)
       {
         float n = 0.5 + noise(i) * 0.5;
-        pos = (rtMat(vec3(0.0, 1.0, 0.4 * noise(i)), (_time * n) / 4.0 + i * 4312.0) * vec4(p, 1.0)).xyz;
+        pos = (rtMat(vec3(0.0, 1.0, 0.4 * noise(i)), (_time * n) / 8.0 + i * 4312.0) * vec4(p, 1.0)).xyz;
+        //pos = (rtMat(vec3(0.0, 1.0, 0.5), 2.16 + i * 4312.0) * vec4(p, 1.0)).xyz;
         pos = (trMat(vec3(10.0 + (i + noise(_seed) * 3.0) * 2.0, 0.0, 0.0)) * vec4(pos, 1.0)).xyz;
+        //pos = (trMat(vec3(15.0, 0.0, 0.0)) * vec4(pos, 1.0)).xyz;
         planet = min(sphere(pos, n), planet);
       }
     }
@@ -146,21 +151,39 @@ vec3 getNorm(in vec3 p)
 vec4 intersect(in vec3 o, in vec3 d, out float dist)
 {
   float eps = 0.001;
+  float gravityDist = 0.7;
   dist = 1e+15;
 
+  vec3 dir = d;
+  vec3 lastPos = o;
+
+  float lastStep = 0.0;
   float diff = 0.0;
-  for (float t = 70.0; t < 130.0; t += 0.2)
+  for (float t = 70.0; t < 140.0; t += MIN_RAY_STEP)
   {
-    if (diff < 0.2)
+    if (diff < MIN_RAY_STEP)
     {
-      vec2 h = map(o + t*d);
+      float delta = t - lastStep;
+      vec3 newPos = lastPos + delta*dir;
+
+      vec2 h = map(newPos);
       dist = min(dist, h.x);
+
       if (h.x <= max(1.0, t) * eps)
-        return vec4(o + (t)*d, h.y);
+        return vec4(newPos, h.y);
+      else if (h.x <= gravityDist && h.y != 1.0) // disable gravity for the sun, keep it smooth on old gpu
+      {
+        vec3 norm = getNorm(newPos);
+        dir -= norm * pow((1.0 - h.x / gravityDist), 2.0) * lastStep * 0.001;
+        dir = normalize(dir);
+      }
+
       diff = h.x;
+      lastPos = newPos;
+      lastStep = t;
     }
     else
-      diff -= 0.2;
+      diff -= MIN_RAY_STEP;
   }
 
   return vec4(0.0);
@@ -184,7 +207,7 @@ vec4 getMaterial(float index)
   else if (index == 2.0)
     m = vec4(0.6, 0.6, 0.7, 1.0);
   else if (index == 10.0)
-    m = vec4(0.7, 0.7, 0.7, 1.0);
+    m = vec4(0.9, 0.9, 0.9, 1.0);
 
   return m;
 }
@@ -204,8 +227,8 @@ vec4 getColor(vec4 p, vec3 d)
     if (p.w != 1.0)
     {
       i = max(0.2, -dot(norm, normalize(p.xyz)));
-      float sss = sss(p.xyz, d, 0.05);
-      i *= sss;
+      //float sss = sss(p.xyz, d, 0.05);
+      //i *= sss;
     }
     else
     {
@@ -229,10 +252,11 @@ vec4 getColor(vec4 p, vec3 d)
   else // Draw some other space bodies
   {
     float r = noise2D(_fragPosition, _seed);
-    if (r > 0.99)
+    float galaxyView = 0.05 * pow(sin((-0.2 + _fragPosition.y + 0.3 * _fragPosition.x) * 3.1415), 8.0);
+    if (r < galaxyView)
     {
       c = getMaterial(10.0);
-      float i = noise2D(_fragPosition, _seed);
+      float i = noise2D(_fragPosition, _seed) * 0.3 + 0.7;
       c = c*i;
     }
   }
