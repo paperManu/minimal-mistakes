@@ -159,7 +159,7 @@ vec4 intersect(in vec3 o, in vec3 d, out float dist)
 
   float lastStep = 0.0;
   float diff = 0.0;
-  for (float t = 70.0; t < 140.0; t += MIN_RAY_STEP)
+  for (float t = 0.0; t < 140.0; t += MIN_RAY_STEP)
   {
     if (diff < MIN_RAY_STEP)
     {
@@ -269,8 +269,8 @@ void main()
 {
   vec4 color = _background;
 
-  _position = normalize(vec3(4.0, 3.0, -8.0)) * 100.0;
-  _target = vec3(cos(_time / 2.34) * 0.2, -1.0 + sin(_time) * 0.2, 0.0);
+  _position = normalize(vec3(4.0, 3.0, -8.0)) * 90.0;
+  _target = vec3(cos(_time / 2.34) * 0.2, -0.5 + sin(_time) * 0.2, 0.0);
 
   _fragPosition = gl_FragCoord.xy * _pixelSize / _resolution.xy;
 
