@@ -1,3 +1,9 @@
+- name: "Point de vue sur la Nymphe"
+  image: works/nymphe.png
+  description: "Created from scratch during a hackathon-like event, Museomix Montreal, which took place in the Museum of Fine Arts of Montreal, this prototype has been imagined, designed and create in two days by a team of six participants from various backgrounds. Our goal was to illustrate the story of a nymphe from antiquity, using a path guiding the visitor through a few questions and a projection-mapped video."
+  date: 2014
+  link: http://projects.museomixmtl.com/projects/39mBPmFZWzoe5GSzh 
+
 - name: "Facebox"
   image: works/facebox.jpg
   description: "This is a Raspberry Pi based shot & print camera, with the particularity that it is designed for self photography. The printing is done by a thermal printer which gives the image a special feeling, the whole device bringing a similar experience to what you would expect from a combination of a photo booth and a Polaroid."
