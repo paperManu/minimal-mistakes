@@ -4,7 +4,7 @@ title: Videoprojection blending and linear workflow
 description: "Some insights regarding projection blending using OpenGL"
 modified: 2014-12-20
 image:
-    feature: spherical_glsl/feature.png
+    feature: linear_blending/banner.jpg
 ---
 
 ## Merging videoprojection
@@ -44,7 +44,11 @@ void main(void)
 
 {% endhighlight %}
 
-An illustration of the resulting projection is shown on this post's banner. And it is not nearly seamless, and the main reason for this fact holds in one word (sort of): sRGB.
+An illustration of the resulting projection is shown in the next image: the center of the image is darker than the borders. The main reason for this fact holds in one word (sort of): sRGB.
+
+<figure>
+    <img src="{{ site.url }}/images/linear_blending/not_linear_example.jpg">
+</figure>
 
 ## Linear workflow to the rescue
 The most common colorspace used to represent any image is sRGB, and for good reasons as it was designed to make the most out of the human vision. The sRGB model can easily be found on the Internet[^3], so let's say that one particularity of this color representation model is that it is not linear but is elevated to a power of 2.2 (roughly). Take any color in the sRGB color space, multiply its channels by two, and display it (on your sRGB screen, like the vast majority of computer screens): the luminance of the displayed color will be more than twice as powerful as the color picked in the first place.
