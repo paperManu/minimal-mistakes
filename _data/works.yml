@@ -1,3 +1,15 @@
+- name: "Manifest Cloudberry Dreams"
+  image: works/cloudberry.jpg
+  description: "Manifest Cloudberry Dreams is an immersive experience around the cloudberry, a wildberries found in northern Québec. The content was projected onto a geodesic dome with Splash, which was controlled by a voice recognition software for switching between video files."
+  date: 2015
+  link: http://www.mobilities.ca/manifest-cloudberry-dreams/
+
+- name: "GIFoMATON"
+  image: works/gifomaton.jpg
+  description: "GIFoMATON is a Tink Tank / NFB project which goal was to allow people to discover films stored in the archives of the NFB. While taking the form of a photo booth, this box takes color and depth videos of the participants, and then merges it within a short GIF sequence taken from a film."
+  date: 2015
+  link: http://blog.nfb.ca/blog/2016/01/20/the-gifntake-goes-on-tour/
+
 - name: "Point de vue sur la Nymphe"
   image: works/nymphe.png
   description: "Created from scratch during a hackathon-like event, Museomix Montreal, which took place in the Museum of Fine Arts of Montreal, this prototype has been imagined, designed and create in two days by a team of six participants from various backgrounds. Our goal was to illustrate the story of a nymphe from antiquity, using a path guiding the visitor through a few questions and a projection-mapped video."
