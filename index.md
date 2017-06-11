@@ -1,7 +1,7 @@
 ---
 layout: home
-description: "A responsive Jekyll theme with editorial tendencies by designer Michael Rose."
-tags: [Jekyll, theme, responsive, blog, template]
+description: Index page, redirects to the about page
+tags: [home]
 image:
   webgl:
     vertex: solar_system.vert

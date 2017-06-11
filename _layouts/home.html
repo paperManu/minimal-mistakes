@@ -4,49 +4,5 @@
 <!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-{% include _head.html %}
+<meta http-equiv="refresh" content="0; url=about" />
 </head>
-
-<body class="home">
-
-{% include _browser-upgrade.html %}
-
-{% include _navigation.html %}
-
-{% if page.image.feature %}
-<div class="image-wrap">
-  <img src="{{ site.url }}/images/{{ page.image.feature }}" alt="{{ page.title }} feature image">
-  {% if page.image.credit %}<span class="image-credit">Photo Credit: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a></span>{% endif %}
-</div><!-- /.image-wrap -->
-{% else if page.image.webgl %}
-  <div id="webgl">
-    <script id="vertexShader" type="x-shader/x-vertex" src="{{ site.url }}/images/webgl/{{ page.image.webgl.vertex }}"></script>
-    <script id="fragmentShader" type="x-shader/x-fragment" src="{{ site.url }}/images/webgl/{{ page.image.webgl.fragment }}"></script>
-    <script src={{ site.url }}/images/webgl/shader_only.js></script>
-  </div>
-{% endif %}
-
-<div class="article-author-side">
-  {% include _author-bio.html %}
-</div>
-
-<div id="index">
-  <h3><a href="{{ site.url}}/posts/">Recent posts</a></h3>
-  {% for post in site.posts limit:5 %}    
-  <article>
-    <h2><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-    <p>{% if post.description %}{{ post.description }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p>
-  </article>
-  {% endfor %}
-</div><!-- /#index -->
-
-<div class="footer-wrap">
-  <footer>
-    {% include _footer.html %}
-  </footer>
-</div><!-- /.footer-wrap -->
-
-{% include _scripts.html %}
-  
-</body>
-</html>

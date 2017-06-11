@@ -1,13 +1,13 @@
 ---
 layout: page
 permalink: /about/
-tagline: Minimal Mistakes, a Jekyll Theme
-tags: [about, Jekyll, theme, responsive]
+tagline: About
+tags: [about]
 modified: 19-3-2014
 image:
   webgl:
-    vertex: curves.vert
-    fragment: curves.frag
+    vertex: solar_system.vert
+    fragment: solar_system.frag
 ---
 
 I am a coder / researcher with a PhD in Computer Graphics from [Arts et Métiers ParisTech](http://www.ensam.fr). Aside from that I am also an engineer (from the same school), and I have a MSc in Simulation and Virtual Reality.

@@ -1,6 +1,6 @@
-title:            Pixels, squares, cubes...
+title:            pixels, squares, cubes...
 tagline:          A short tagline
-description:      Not much Legos in there, but some other building blocks...
+description:      Loves Legos in there, but some other building blocks...
 # Your site's domain goes here. Leave localhost server or blank when working locally.
 #url:              https://emmanueldurand.net
 url:
@@ -33,8 +33,6 @@ bing_verify:
 links:
   - title: About
     url: /about
-  - title: Posts
-    url: /posts
   - title: Realizations
     url: /realizations
 
@@ -54,14 +52,14 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  enable_coderay: false
-
-  coderay:
-    coderay_line_numbers: 
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: class
+#  enable_coderay: false
+#
+#  coderay:
+#    coderay_line_numbers: 
+#    coderay_line_numbers_start: 1
+#    coderay_tab_width: 4
+#    coderay_bold_every: 10
+#    coderay_css: class
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sh", "*.sublime-project", "*.sublime-workspace", "*.swp", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]

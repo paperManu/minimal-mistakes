@@ -1,0 +1,11 @@
+- name: "Splash"
+  link: "https://github.com/paperManu/splash"
+  description: "A modular video-mapping software, capable of handling an unlimited number of inputs and outputs. First use is for projection in immersive spaces such as fulldomes."
+
+- name: "Blobserver"
+  link: "https://github.com/paperManu/blobserver"
+  description: "A machine vision engine handling flows of data, making it configurable and extendable. Reads video feeds, outputs OSC messages. Meant to ease the development of new detection algorithms."
+
+- name: "PostureVision"
+  link: "https://github.com/sat-metalab/posturevision"
+  description: "A library meant to allow for capturing textured 3D objects in realtime through depth cameras. Has used Kinect, Primesense, Intel Realsense, and Kinect2 cameras over the time."
