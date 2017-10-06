@@ -32,11 +32,6 @@
   </div>
 
   <div class=works>
-    <h1>Softwares (some of them)</h1>
-      {% for software in site.data.softwares %}
-        <b><a href={{ software.link }}>{{ software.name }}</a></b> - {{ software.description }}<br><br>
-      {% endfor %}
-
     <h1>Publications</h1>
       {% for article in site.data.articles %}
         <div class=article-citation>
@@ -46,6 +41,11 @@
             {{ article.authors }}. {{ article.title }}, in <i>{{ article.publication }}</i> ({{ article.date }})<br>
           {% endif %}
         </div>
+      {% endfor %}
+
+    <h1>Softwares (some of them)</h1>
+      {% for software in site.data.softwares %}
+        <b><a href={{ software.link }}>{{ software.name }}</a></b> - {{ software.description }}<br><br>
       {% endfor %}
 
     <h1>Projects</h1>

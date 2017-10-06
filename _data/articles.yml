@@ -1,3 +1,9 @@
+- authors: "F. U. Brien, E. Durand, J. Soria, M. Seta, N. Bouillot"
+  title: "In Situ Editing (EiS) For Fulldomes"
+  publication: "ACM Symposium on Virtual Reality Software and Technology"
+  date: "November 2017"
+  link: https://github.com/sat-metalab/metalabbib/raw/master/papers/2017brien.pdf
+
 - authors:  "E. Durand, F. Mérienne, C. Père, P. Callet"
   title: "Ray-on, an On-Site Photometric Augmented Reality Device"
   publication: "Journal on Computing and Cultural Heritage"
