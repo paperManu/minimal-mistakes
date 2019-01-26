@@ -1,3 +1,15 @@
+- authors: "Nicolas Bouillot and Michał Seta and Émile Ouellet-Delorme and Zack Settel and Emmanuel Durand"
+  title: "Rendering of Heterogeneous Spatial Audio Scenes"
+  publication: "Proceedings of the Linux Audio Conference"
+  date: "March 2019"
+  link:
+
+- authors: "Julien Puget and Mylène Pardoen and Nicolas Bouillot and Emmanuel Durand and Michał Seta and Pascal Bastien"
+  title: "Rapid Prototyping of Immersive Video for Popularization of Historical Knowledge"
+  publication: "International Conference on Tangible, Embedded, and Embodied Interaction"
+  date: "March 2019"
+  link: https://gitlab.com/sat-metalab/metalabbib/raw/master/papers/2019puget.pdf?inline=false
+
 - authors: "F. U. Brien, E. Durand, J. Soria, M. Seta, N. Bouillot"
   title: "In Situ Editing (EiS) For Fulldomes"
   publication: "ACM Symposium on Virtual Reality Software and Technology"
